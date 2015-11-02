@@ -1,5 +1,3 @@
-
-
 var Person = function(name, age){
     this.name = name;
     this.age = age;
@@ -14,10 +12,15 @@ var Engine = function(){
 }
 var COUNTER = 0;
 Engine.prototype.logIn = function(id){
-    for(var i = 0; i < this.users.length; i++){
-        if(this.users[i].userId === id){
-            this.currentUser = this.users[i];
+    if(this.currentUser === null){
+        for(var i = 0; i < this.users.length; i++){
+            if(this.users[i].userId === id){
+                this.currentUser = this.users[i];
+                return this.users[i].name + " Is logged in"
+            }
         }
+    } else {
+        console.log("Already logged in");
     }
 }
 
@@ -25,6 +28,7 @@ Engine.prototype.addPerson = function(userObject){
     COUNTER += 1
     userObject.userId = COUNTER;
     this.users.push(userObject);
+    return userObject.name + " with an id of " + userObject.userId
 };
 
 Engine.prototype.massAdd = function(){
@@ -34,21 +38,21 @@ Engine.prototype.massAdd = function(){
 }
 
 Engine.prototype.getRandom = function(){
-    var RANDOM = Math.floor(Math.random() * 5);
+    var RANDOM = Math.floor(Math.random() * this.users.length);
     return this.users[RANDOM];
 }
 
 Engine.prototype.ratePerson = function(person){
     var randomPerson = this.getRandom();
-    choice = window.prompt("do you like or dislike" + randomPerson.name + " " + randomPerson.age);
+    choice = window.prompt("do you 'like' or 'dislike' " + randomPerson.name + " " + randomPerson.age);
     if(choice === "like"){
         this.currentUser.likes.push(randomPerson);
     }
 }
 
-var p1 = new Person("Cairo", 22);
-var p2 = new Person("Arian", 25);
-var p3 = new Person("America", 24);
-var p4 = new Person("Zac", 25);
+var p1 = new Person("S1ler", 22);
+var p2 = new Person("Flubber", 25);
+var p3 = new Person("Xercon", 24);
+var p4 = new Person("Xenre", 25);
 var e = new Engine();
-e.massAdd(p1, p2, p3, p4)
+e.massAdd(p1, p2, p3, p4);
