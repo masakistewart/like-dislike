@@ -1,28 +1,34 @@
+
+
 var Person = function(name, age){
     this.name = name;
     this.age = age;
     this.likes = [];
     this.dislikes = [];
-};
-
-var Engine = function(){
+    this.historyOfPple = [];
     this.allPeople = [];
 };
-Engine.prototype.addPerson = function(userObject){
+var RANDOM = function(){ Math.floor(Math.random() * this.allPeople.length);}
+
+Person.prototype.addPerson = function(userObject){
     this.allPeople.push(userObject);
 };
-Engine.prototype.massAdd = function(){
+Person.prototype.massAdd = function(){
     for(var i = 0; i < arguments.length; i++){
         this.addPerson(arguments[i]);
     }
 }
-Engine.prototype.getRandom = function(){
-    var random = Math.floor(Math.random() * this.allPeople.length);
-    return this.allPeople[random];
+Person.prototype.getRandom = function(){
+    return this.allPeople[Math.floor(Math.random() * this.allPeople.length)];
 }
 
-Engine.prototype.ratePerson = function(userObject){
-    var person =  this.getRandom();
+Person.prototype.ratePerson = function(){
+    var randomPerson = this.getRandom();
+    choice = window.prompt("do you like or dislike" + radomPerson.name + " "  + randomPerson.age);
+    if(choice === "like"){
+        randomPerson.likes.push(this);
+        this.historyOfPple.push(randomPerson())
+    } else if(likeOrDislike === "dislike"){
+        randomPerson.dislikes.push(this)
+    }
 }
-
-
